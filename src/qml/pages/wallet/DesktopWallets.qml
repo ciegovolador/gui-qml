@@ -80,7 +80,24 @@ Page {
                 ButtonGroup.group: navigationTabs  
                 property bool estimating: syncState.estimating
                 property bool faulted: nodeModel.faulted
+                iconSource: {
+                        if (blockClockTabButton.paused) {
+                           "image://images/info"
+                        } else if (blockClockTabButton.connected && blockClockTabButton.synced) {
+                             "image://images/check"
+                        } else if (blockClockTabButton.connected){
+                            "image://images/arrow-down"
+                        } else if (blockClockTabButton.faulted){
+                            "image://images/error"
+                        } else {
+                           "image://images/minus" 
+                        }
+                    }
+                iconColor: Theme.color.neutral7
                 
+
+                
+                 
 
                 BlockClockDial {
                     anchors.horizontalCenter: blockClockTabButton.horizontalCenter
@@ -120,6 +137,7 @@ Page {
                     anchors.horizontalCenter: blockClockTabButton.horizontalCenter
 
                     visible: blockClockTabButton.hovered
+                   
                     text: {
                         if (blockClockTabButton.paused) {
                             qsTr("Paused")
